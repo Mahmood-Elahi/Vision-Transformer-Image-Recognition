@@ -4,5 +4,5 @@ checkpoints/
 *.pt
 __pycache__/
 *.pyc
-
+.ipynb_checkpoints/
 results/*.json
