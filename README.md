@@ -262,62 +262,19 @@ The final test accuracy of 91.06% shows that the selected Vision Transformer gen
 
 ---
 
-## Classification Report
+## Visual Results
 
-| Class | Precision | Recall | F1-Score |
-|---|---:|---:|---:|
-| airplane | 0.91 | 0.93 | 0.92 |
-| automobile | 0.95 | 0.96 | 0.95 |
-| bird | 0.89 | 0.88 | 0.88 |
-| cat | 0.84 | 0.79 | 0.82 |
-| deer | 0.89 | 0.90 | 0.90 |
-| dog | 0.84 | 0.85 | 0.85 |
-| frog | 0.92 | 0.96 | 0.94 |
-| horse | 0.94 | 0.93 | 0.94 |
-| ship | 0.96 | 0.96 | 0.96 |
-| truck | 0.95 | 0.94 | 0.95 |
+### Validation Accuracy
+![Validation Accuracy](results/graphs/validation_accuracy_pure_vit.png)
 
-Overall test accuracy:
+### Training and Validation Loss
+![Training and Validation Loss](results/graphs/loss_curve_pure_vit.png)
 
-```text
-91.06%
-```
+### Learning Rate Schedule
+![Learning Rate Schedule](results/graphs/learning_rate_pure_vit.png)
 
----
-
-## Speed vs Accuracy Experiment
-
-| Version | Patch Size | Test Accuracy | Training Time |
-|---|---:|---:|---:|
-| Higher-accuracy model | 2 | 91.06% | 213.83 min |
-| Faster model | 4 | 89.59% | 38.45 min |
-
-The patch-size-4 model trained about 5.6× faster on the NVIDIA RTX A6000, but had lower final accuracy.
-
-This shows the tradeoff between token count and model performance.
-
----
-
-## Performance Analysis
-
-The model performs strongest on visually distinct classes:
-
-```text
-automobile
-frog
-ship
-truck
-```
-
-The model has more difficulty with visually similar animal classes:
-
-```text
-cat
-dog
-bird
-```
-
-This is expected because CIFAR-10 images are only 32 × 32 pixels.
+### Confusion Matrix
+![Confusion Matrix](results/graphs/confusion_matrix_pure_vit.png)
 
 ---
 
