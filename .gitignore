@@ -1,15 +1,8 @@
-__pycache__/
-*.pyc
-*.pth
-*.pt
-*.ckpt
-
 data/
 checkpoints/
-results/
-runs/
+*.pth
+*.pt
+__pycache__/
+*.pyc
 
-.env
-.venv/
-venv/
-.DS_Store
+results/*.json
