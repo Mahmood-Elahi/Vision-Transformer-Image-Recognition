@@ -137,15 +137,15 @@ class VisionTransformer(nn.Module):
     def __init__(
         self,
         image_size=32,
-        patch_size=4,
+        patch_size=2,
         in_channels=3,
         num_classes=10,
         embed_dim=384,
         depth=12,
         num_heads=6,
         mlp_dim=1536,
-        dropout=0.10,
-        drop_path_rate=0.10,
+        dropout=0.0,
+        drop_path_rate=0.20,
     ):
         super().__init__()
 
@@ -239,24 +239,26 @@ class VisionTransformer(nn.Module):
         batch_size = x.shape[0]
 
         # Convert image into patch embeddings.
-        # Output shape:
-        # [batch_size, embed_dim, patches_per_row, patches_per_row]
+        # Output shape for patch size 2:
+        # [batch_size, embed_dim, 16, 16]
         x = self.patch_embed(x)
 
         # Flatten spatial patch grid into token sequence.
         # Shape becomes:
-        # [batch_size, embed_dim, num_patches]
+        # [batch_size, embed_dim, 256]
         x = x.flatten(2)
 
         # Move embedding dimension to the end.
         # Shape becomes:
-        # [batch_size, num_patches, embed_dim]
+        # [batch_size, 256, embed_dim]
         x = x.transpose(1, 2)
 
         # Expand CLS token for each image in the batch.
         cls_tokens = self.cls_token.expand(batch_size, -1, -1)
 
         # Add CLS token to the beginning of the token sequence.
+        # Shape becomes:
+        # [batch_size, 257, embed_dim]
         x = torch.cat((cls_tokens, x), dim=1)
 
         # Add positional embeddings.

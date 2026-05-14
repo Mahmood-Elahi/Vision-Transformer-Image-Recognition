@@ -4,7 +4,7 @@
 # This file stores all global settings for the CIFAR-10
 # Vision Transformer project.
 #
-# Keeping settings here makes it easy to tune the model without
+# Keeping settings here makes it easier to tune the model without
 # editing multiple files.
 # ============================================================
 
@@ -20,16 +20,18 @@ SEED = 42
 # ============================================================
 
 # Number of images processed at once.
-# Larger batch size can improve GPU efficiency, but uses more VRAM.
-BATCH_SIZE = 512
+# Batch size 128 is used for the higher-accuracy patch-size-2 model.
+# Smaller batch size is slower than 512, but it is more memory-stable
+# because patch size 2 creates many more image tokens.
+BATCH_SIZE = 128
 
 # Maximum number of training epochs.
 # One epoch = one full pass through the training dataset.
-EPOCHS = 150
+EPOCHS = 200
 
 # Stops training if validation accuracy does not improve for this
 # many consecutive epochs.
-EARLY_STOPPING_PATIENCE = 25
+EARLY_STOPPING_PATIENCE = 30
 
 
 # ============================================================
@@ -40,9 +42,10 @@ EARLY_STOPPING_PATIENCE = 25
 IMAGE_SIZE = 32
 
 # Patch size controls how the image is split into tokens.
-# PATCH_SIZE = 4 means each 32x32 image becomes 8x8 = 64 patches.
-# Smaller patch size = more detail but slower training.
-PATCH_SIZE = 4
+# PATCH_SIZE = 2 means each 32x32 image becomes 16x16 = 256 patches.
+# This is slower than patch size 4, but usually gives better accuracy
+# because the model sees finer image detail.
+PATCH_SIZE = 2
 
 # CIFAR-10 images are RGB, so there are 3 input channels.
 IN_CHANNELS = 3
@@ -75,12 +78,13 @@ MLP_DIM = 1536
 # ============================================================
 
 # Dropout randomly removes activations during training.
-# This helps prevent overfitting.
-DROPOUT = 0.10
+# This version uses 0.0 because the original 91% run performed well
+# with other forms of regularization already enabled.
+DROPOUT = 0.0
 
 # Drop path randomly skips residual paths during training.
-# This is common in modern transformer training.
-DROP_PATH_RATE = 0.10
+# 0.20 gives strong regularization for the deeper ViT.
+DROP_PATH_RATE = 0.20
 
 
 # ============================================================
@@ -98,7 +102,7 @@ WEIGHT_DECAY = 0.05
 
 # Number of epochs used to slowly increase the learning rate.
 # Warmup stabilizes transformer training.
-WARMUP_EPOCHS = 15
+WARMUP_EPOCHS = 20
 
 
 # ============================================================
@@ -106,11 +110,12 @@ WARMUP_EPOCHS = 15
 # ============================================================
 
 # Label smoothing prevents the model from becoming too confident.
-LABEL_SMOOTHING = 0.05
+LABEL_SMOOTHING = 0.1
 
 # Mixup blends two images and their labels together.
-# Lower value = less aggressive mixing.
-MIXUP_ALPHA = 0.4
+# 0.8 is stronger than the faster version and was used in the
+# higher-accuracy training configuration.
+MIXUP_ALPHA = 0.8
 
 # CutMix cuts a region from one image and pastes it into another.
 CUTMIX_ALPHA = 1.0
@@ -137,8 +142,7 @@ EMA_DECAY = 0.999
 # ============================================================
 
 # Number of CPU workers used to load data.
-# Higher values can improve speed if the CPU can keep up.
-NUM_WORKERS = 8
+NUM_WORKERS = 4
 
 
 # ============================================================

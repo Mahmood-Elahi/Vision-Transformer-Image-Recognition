@@ -30,7 +30,7 @@ def smooth_one_hot(labels, num_classes=NUM_CLASSES, smoothing=LABEL_SMOOTHING):
     [0, 0, 0, 1, 0, 0, 0, 0, 0, 0]
 
     Smoothed version:
-    [0.005, 0.005, 0.005, 0.955, 0.005, ...]
+    [0.01, 0.01, 0.01, 0.91, 0.01, ...]
 
     This prevents the model from becoming too confident.
     """

@@ -239,6 +239,7 @@ def main():
                     "config": {
                         "batch_size": BATCH_SIZE,
                         "epochs": EPOCHS,
+                        "early_stopping_patience": EARLY_STOPPING_PATIENCE,
                         "image_size": IMAGE_SIZE,
                         "patch_size": PATCH_SIZE,
                         "embed_dim": EMBED_DIM,

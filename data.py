@@ -51,9 +51,11 @@ def get_dataloaders():
         # This is useful because objects can appear facing either direction.
         transforms.RandomHorizontalFlip(),
 
-        # RandAugment automatically applies random image augmentations.
-        # This can improve CIFAR-10 generalization.
-        transforms.RandAugment(num_ops=2, magnitude=9),
+        # AutoAugment applies a learned augmentation policy designed for CIFAR-10.
+        # This was used in the higher-accuracy version.
+        transforms.AutoAugment(
+            policy=transforms.AutoAugmentPolicy.CIFAR10,
+        ),
 
         # Converts PIL image to PyTorch tensor.
         transforms.ToTensor(),
@@ -104,7 +106,7 @@ def get_dataloaders():
     )
 
     # Same training dataset, but without augmentation.
-    # This is used for validation so the validation images are clean.
+    # This is used for validation so validation images are clean.
     train_full_eval = torchvision.datasets.CIFAR10(
         root=DATA_DIR,
         train=True,
@@ -156,7 +158,6 @@ def get_dataloaders():
         num_workers=NUM_WORKERS,
         pin_memory=True,
         persistent_workers=persistent_workers,
-        prefetch_factor=4,
     )
 
     val_loader = DataLoader(
@@ -166,7 +167,6 @@ def get_dataloaders():
         num_workers=NUM_WORKERS,
         pin_memory=True,
         persistent_workers=persistent_workers,
-        prefetch_factor=4,
     )
 
     test_loader = DataLoader(
@@ -176,7 +176,6 @@ def get_dataloaders():
         num_workers=NUM_WORKERS,
         pin_memory=True,
         persistent_workers=persistent_workers,
-        prefetch_factor=4,
     )
 
     return train_loader, val_loader, test_loader
