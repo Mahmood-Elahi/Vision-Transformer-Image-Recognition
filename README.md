@@ -5,8 +5,6 @@
 ![Torchvision](https://img.shields.io/badge/Torchvision-0.26-red.svg)
 ![Dataset](https://img.shields.io/badge/Dataset-CIFAR--10-green.svg)
 ![Model](https://img.shields.io/badge/Model-Vision%20Transformer-purple.svg)
-![Training](https://img.shields.io/badge/Training-From%20Scratch-lightgrey.svg)
-![Accuracy](https://img.shields.io/badge/Test%20Accuracy-91.06%25-brightgreen.svg)
 ![GPU](https://img.shields.io/badge/GPU-NVIDIA%20RTX%20A6000-76B900.svg)
 
 This project uses a pure Vision Transformer built with PyTorch to classify images from the CIFAR-10 dataset.
@@ -21,7 +19,6 @@ The project focuses on a complete computer vision training pipeline with patch-b
 Dataset: CIFAR-10
 Task: 10-class image classification
 Model: Pure Vision Transformer
-Training: From scratch
 Best checkpoint metric: Highest validation accuracy
 Training GPU: NVIDIA RTX A6000
 Best test accuracy: 91.06%
@@ -300,6 +297,7 @@ results/
 
 ```text
 Vision-Transformer-Image-Classifier/
+│
 ├── main.py
 ├── config.py
 ├── data.py
@@ -311,22 +309,17 @@ Vision-Transformer-Image-Classifier/
 ├── utils.py
 ├── requirements.txt
 ├── README.md
-└── .gitignore
-```
-
-Generated folders:
-
-```text
-checkpoints/
-└── best_pure_vit_cifar10.pth
-
-results/
-├── pure_vit_results.json
-└── graphs/
-    ├── loss_curve_pure_vit.png
-    ├── validation_accuracy_pure_vit.png
-    ├── learning_rate_pure_vit.png
-    └── confusion_matrix_pure_vit.png
+├── .gitignore
+│
+├── notebooks/
+│   └── vit_cifar10_demo.ipynb
+│
+└── results/
+    └── graphs/
+        ├── loss_curve_pure_vit.png
+        ├── validation_accuracy_pure_vit.png
+        ├── learning_rate_pure_vit.png
+        └── confusion_matrix_pure_vit.png
 ```
 
 ---
@@ -347,6 +340,20 @@ results/
 
 ---
 
+
+## Jupyter Notebook Demo
+
+This repo includes an optional notebook: `notebooks/vit_cifar10_demo.ipynb`.
+
+It is not the main training pipeline. It is used to display the model results, graphs, confusion matrix, and Vision Transformer shape flow.
+
+The main training code remains in `main.py`, `models.py`, `data.py`, `engine.py`, and the other Python files.
+
+The notebook makes the project easier to review without rerunning the full training process.
+
+---
+
+
 ## Technologies Used
 
 - Python
@@ -356,8 +363,6 @@ results/
 - Matplotlib
 - Scikit-learn
 - tqdm
-- CUDA GPU acceleration
-- NVIDIA RTX A6000
 
 ---
 
@@ -371,14 +376,6 @@ python main.py
 ```
 
 The script automatically downloads CIFAR-10 if it is not already available.
-
----
-
-## Notes
-
-The `data/`, `checkpoints/`, and `results/` folders are usually excluded from GitHub using `.gitignore` because datasets, model weights, and generated outputs can be large.
-
-Training time may vary depending on hardware.
 
 ---
 
