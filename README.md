@@ -369,8 +369,8 @@ The notebook makes the project easier to review without rerunning the full train
 ## How to Run
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/Vision-Transformer-Image-Classifier.git
-cd Vision-Transformer-Image-Classifier
+git clone https://github.com/YOUR_USERNAME/Vision-Transformer-Image-Recognition.git
+cd Vision-Transformer-Image-Recognition
 pip install torch torchvision numpy matplotlib scikit-learn tqdm
 python main.py
 ```
